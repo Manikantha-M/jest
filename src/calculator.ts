@@ -2,7 +2,7 @@
 
 export default class Calculator {
     value:number;
-    constructor(value:number){
+    constructor(){
         this.value = 0;
     };
     add(num:number):number{
