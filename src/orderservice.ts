@@ -8,7 +8,7 @@ class PaymentGateway {
 // Real inventory service
 
 class InventoryService {
-    checkstock(productId:string):boolean {
+    checkStock(productId:string):boolean {
         return true
     }
 };
@@ -24,7 +24,7 @@ export class OrderService {
         this.inventoryService = inventoryService
     }
     checkout(amount:number, productId:string):string {
-        if(!this.inventoryService.checkstock(productId)) {
+        if(!this.inventoryService.checkStock(productId)) {
             return  `Order failed: product out of stock`
         }
         const paymentResponse = this.paymentGateway.processPayment(amount);
