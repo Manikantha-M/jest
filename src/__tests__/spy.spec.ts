@@ -35,3 +35,25 @@ describe('spy mocking examples', ()=> {
         expect(() => user.saveProfile('')).toThrow('Name is required');
     });
 });
+
+// Clearing and Resetting Mocks in JEST - Otherwise mock responses affect following tests
+
+describe('user role test', () => {
+    let roleSpy: jest.SpyInstance;
+    beforeEach(()=>{
+        roleSpy = jest.spyOn(user, 'getRole')
+    });
+    afterEach(()=>{
+        jest.restoreAllMocks();
+    })
+    it('should return mocked guest role', ()=>{
+        roleSpy.mockReturnValue('guest');
+        const result = user.getRole(2);
+        expect(result).toBe('guest');
+    });
+    it('should return original implementation', () => {
+        const result = user.getRole(2);
+        expect(result).toBe('admin')
+    });
+
+})
