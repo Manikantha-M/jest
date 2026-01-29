@@ -48,7 +48,7 @@ describe('OrderService', ()=>{
         const inventoryStub = new InventoryServiceStub();
         const orderService = new OrderService(fakePaymentGateway, inventoryStub);
         const result = orderService.checkout(55.99, 'PROD1234');
-         expect(result).toBe('Processed Payment of $55.99 - Earned 5 bonus points');
+        expect(result).toBe('Processed Payment of $55.99 - Earned 5 bonus points');
         expect(fakePaymentGateway.getTransactions()).toEqual([{"amount": 55.99, "status": "success"}]);
     })
 });
