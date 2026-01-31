@@ -56,4 +56,7 @@ describe('user role test', () => {
         expect(result).toBe('admin')
     });
 
-})
+});
+
+//  spying with jest begins
+
