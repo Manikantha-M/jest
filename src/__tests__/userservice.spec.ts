@@ -36,4 +36,15 @@ describe('UserService', () => {
         expect(subscribeUserSpy).toHaveBeenLastCalledWith(mockUser);
         expect(result).toEqual({"msg": "user registered successfully"})
     });
+    it('should return error message if name is not provided', async()=>{
+       const invalidInput = {name:'', email:mockEmail};
+       const userService = new UserService(invalidInput.name, invalidInput.email, databaseService, newsletterservice);
+       createUserSpy.mockImplementation(()=> {
+        return Promise.reject('Name is required')
+       });
+       const result = await userService.registerUser();
+       expect(createUserSpy).toHaveBeenCalledWith(invalidInput.name, invalidInput.email);
+       expect(subscribeUserSpy).not.toHaveBeenCalled();
+       expect(result).toEqual({"msg": "failed to register user"})
+    })
 });
